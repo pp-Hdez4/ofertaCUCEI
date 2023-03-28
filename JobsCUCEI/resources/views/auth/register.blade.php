@@ -1,12 +1,12 @@
 <x-guest-layout>
     @vite('resources/css/app.css')
    
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" novalidate>
         @csrf
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nombre')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
@@ -18,9 +18,23 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- ROL -->
+        <div class="mt-4">
+            <x-input-label for="rol" :value="__('Tipo de cuenta ')" />
+            <select
+                id="rol"
+                name="rol"
+                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full"
+            >
+                <option value="">-- Selecciona un rol --</option>
+                <option value="1">Estudiante - Practicante</option>
+                <option value="2">Ofertante -Publicar ofertas</option>
+            </select>
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Contrasena')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -32,7 +46,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="password_confirmation" :value="__('Repetir contrasena')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
@@ -41,17 +55,28 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+        <div class="flex justify-between my-5">
+            <x-link
+                :href="route('login')"
+            >
+                Login
 
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
+            </x-link>
+               
+
+            <x-link
+            :href="route('password.request')"
+            >
+                Olvidaste tu contrasena
+
+            </x-link>
+
+            
         </div>
+
+        <x-primary-button class="w-full justify-center">
+            {{ __('Crea una cuenta') }}
+        </x-primary-button>
     </form>
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    
 </x-guest-layout>
