@@ -97,6 +97,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         @auth
+            @if (auth()->user()->rol===2)
+                <a class="mr-2 w-7 h-7 bg-red-700 hover:bg-green-400 rounded-full flex-col justify-center items-center" href="{{ route('notificaciones') }}">
+                    {{auth()::user()->unreadNotifications->count()}}
+                </a>
+            @endif
             
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
