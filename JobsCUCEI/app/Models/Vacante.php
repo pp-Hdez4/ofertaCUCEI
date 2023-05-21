@@ -34,5 +34,10 @@ class Vacante extends Model
 
     }
 
+    public function candidatos(){
+        return $this->hasMany(Candidato::class);
+
+    }
+
 
 }

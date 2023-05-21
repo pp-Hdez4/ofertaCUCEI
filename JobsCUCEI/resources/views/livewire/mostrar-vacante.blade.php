@@ -47,6 +47,13 @@
         </div>
         
     @endguest
+
+     @cannot('create', App\Models\Vacante:class)
+        <Livewire:postular-vacante :vacante="$vacante" />
+
+     @endcannot
+
+    
     
 
 
